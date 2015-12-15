@@ -12,7 +12,6 @@ import org.xdi.oxauth.model.common.Mode;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,6 @@ import java.util.List;
  * @author Yuriy Movchan
  * @version October 16, 2015
  */
-@XmlRootElement(name = "configuration")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Configuration {
 
@@ -39,6 +37,7 @@ public class Configuration {
     private String clientInfoEndpoint;
     private String checkSessionIFrame;
     private String endSessionEndpoint;
+    private String endSessionPage;
     private String jwksUri;
     private String registrationEndpoint;
     private String validateTokenEndpoint;
@@ -52,7 +51,6 @@ public class Configuration {
     private String openidSubAttribute;
     private List<String> responseTypesSupported;
     private List<String> grantTypesSupported;
-    private List<String> acrValuesSupported;
     private List<String> subjectTypesSupported;
     private List<String> userInfoSigningAlgValuesSupported;
     private List<String> userInfoEncryptionAlgValuesSupported;
@@ -110,8 +108,6 @@ public class Configuration {
     private Boolean clientAuthenticationFiltersEnabled;
     private List<AuthenticationFilter> authenticationFilters;
     private List<ClientAuthenticationFilter> clientAuthenticationFilters;
-
-    private Boolean externalAuthenticatorEnabled;
 
     private String applianceInum;
     private int sessionIdUnusedLifetime;
@@ -351,6 +347,25 @@ public class Configuration {
     }
 
     /**
+     * Returns the URL of the End Session page.
+     *
+     * @return The URL of the End Session page.
+     */
+    @XmlElement(name = "end-session-page")
+    public String getEndSessionPage() {
+        return endSessionPage;
+    }
+
+    /**
+     * Sets the URL of the End Session page.
+     *
+     * @param endSessionPage The URL of the End Session page.
+     */
+    public void setEndSessionPage(String endSessionPage) {
+        this.endSessionPage = endSessionPage;
+    }
+
+    /**
      * Returns the URL of the OP's JSON Web Key Set (JWK) document that contains the Server's signing key(s)
      * that are used for signing responses to the Client.
      * The JWK Set may also contain the Server's encryption key(s) that are used by the Client to encrypt
@@ -493,16 +508,6 @@ public class Configuration {
 
     public void setGrantTypesSupported(List<String> grantTypesSupported) {
         this.grantTypesSupported = grantTypesSupported;
-    }
-
-    @XmlElementWrapper(name = "acr-values-supported")
-    @XmlElement(name = "acr")
-    public List<String> getAcrValuesSupported() {
-        return acrValuesSupported;
-    }
-
-    public void setAcrValuesSupported(List<String> acrValuesSupported) {
-        this.acrValuesSupported = acrValuesSupported;
     }
 
     @XmlElementWrapper(name = "subject-types-supported")
@@ -999,15 +1004,6 @@ public class Configuration {
         }
 
         return clientAuthenticationFilters;
-    }
-
-    @XmlElement(name = "external-auth-enabled")
-    public Boolean getExternalAuthenticatorEnabled() {
-        return externalAuthenticatorEnabled;
-    }
-
-    public void setExternalAuthenticatorEnabled(Boolean externalAuthenticatorEnabled) {
-        this.externalAuthenticatorEnabled = externalAuthenticatorEnabled;
     }
 
     @XmlElement(name = "appliance-inum")

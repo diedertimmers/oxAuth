@@ -10,6 +10,7 @@
     "clientInfoEndpoint":"${config.oxauth.contextPath}/seam/resource/restv1/oxauth/clientinfo",
     "checkSessionIFrame":"${config.oxauth.contextPath}/opiframe",
     "endSessionEndpoint":"${config.oxauth.contextPath}/seam/resource/restv1/oxauth/end_session",
+    "endSessionPage":"${config.oxauth.contextPath}/seam/resource/restv1/oxauth/end_session_page",
     "jwksUri":"${config.oxauth.contextPath}/seam/resource/restv1/oxauth/jwks",
     "registrationEndpoint":"${config.oxauth.contextPath}/seam/resource/restv1/oxauth/register",
     "validateTokenEndpoint":"${config.oxauth.contextPath}/seam/resource/restv1/oxauth/validate",
@@ -35,7 +36,6 @@
         "implicit",
         "urn:ietf:params:oauth:grant-type:jwt-bearer"
     ],
-    "acrValuesSupported":null,
     "subjectTypesSupported":[
         "public",
         "pairwise"
@@ -154,15 +154,15 @@
     "requireRequestUriRegistration":false,
     "opPolicyUri":"http://ox.gluu.org/doku.php?id=oxauth:policy",
     "opTosUri":"http://ox.gluu.org/doku.php?id=oxauth:tos",
-    "authorizationCodeLifetime":0,
+    "authorizationCodeLifetime":${config.client.authorization-code-lifetime},
     "refreshTokenLifetime":14400,
     "idTokenLifetime":3600,
     "shortLivedAccessTokenLifetime":3600,
     "longLivedAccessTokenLifetime":31536000,
-    "umaRequesterPermissionTokenLifetime":0,
+    "umaRequesterPermissionTokenLifetime":${config.uma.requester-permission-token-lifetime},
     "umaAddScopesAutomatically":false,
     "umaKeepClientDuringResourceSetRegistration":true,
-    "cleanServiceInterval":0,
+    "cleanServiceInterval":${config.client.clean-service-interval},
     "federationCheckInterval":86400,
     "keyRegenerationEnabled":false,
     "keyRegenerationInterval":48,
@@ -171,7 +171,7 @@
     "organizationInum":"${config.oxauth.organization}",
     "oxId":"https://${server.name}/oxid/service/gluu/inum",
     "dynamicRegistrationEnabled":true,
-    "dynamicRegistrationExpirationTime":0,
+    "dynamicRegistrationExpirationTime":${config.client.dynamic-registration-expiration-time},
     "dynamicRegistrationPersistClientAuthorizations":true,
     "trustedClientEnabled":true,
     "dynamicRegistrationScopesParamEnabled":true,
@@ -200,12 +200,11 @@
     "clientAuthenticationFilters":[
         {
             "filter":"myCustomAttr1={0}",
-            "bind":null,
-            "bindPasswordAttribute":null,
+            "bind":false,
+            "bindPasswordAttribute":"oxAuthClientSecret",
             "baseDn":"ou=clients,o=${config.oxauth.organization},o=gluu"
         }
     ],
-    "externalAuthenticatorEnabled":null,
     "applianceInum":"${config.oxauth.appliance}",
     "sessionIdUnusedLifetime":86400,
     "sessionIdUnauthenticatedUnusedLifetime":60,

@@ -113,4 +113,10 @@
           <persistence-unit-name>oxauth</persistence-unit-name>
        </persistence-unit-ref>
     -->
+
+	<env-entry>
+		<env-entry-name>com.sun.faces.ClientStateSavingPassword</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>qLIsT+20NUPIyAp0SXHIUEWaXfYqdgM5EWYSx9VE4b0=</env-entry-value>
+	</env-entry>
 </web-app>

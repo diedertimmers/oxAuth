@@ -9,8 +9,8 @@ package org.xdi.oxauth.model.registration;
 import org.apache.commons.lang.ArrayUtils;
 import org.codehaus.jettison.json.JSONArray;
 import org.gluu.site.ldap.persistence.annotation.*;
+import org.xdi.ldap.model.CustomAttribute;
 import org.xdi.oxauth.model.common.AuthenticationMethod;
-import org.xdi.oxauth.model.common.CustomAttribute;
 import org.xdi.oxauth.model.common.ResponseType;
 import org.xdi.oxauth.model.common.Scope;
 import org.xdi.oxauth.model.config.ConfigurationFactory;
@@ -40,6 +40,12 @@ public class Client {
 
     @LdapAttribute(name = "oxAuthClientSecret")
     private String encodedClientSecret;
+
+    @LdapAttribute(name = "oxAuthLogoutURI")
+    private String logoutUri;
+
+    @LdapAttribute(name = "oxAuthLogoutSessionRequired")
+    private Boolean logoutSessionRequired;
 
     @LdapAttribute(name = "oxAuthRegistrationAccessToken")
     private String registrationAccessToken;
@@ -174,6 +180,42 @@ public class Client {
 
     public void setDn(String dn) {
         this.dn = dn;
+    }
+
+    /**
+     * Gets logout session required.
+     *
+     * @return logout session required
+     */
+    public Boolean getLogoutSessionRequired() {
+        return logoutSessionRequired;
+    }
+
+    /**
+     * Sets logout session required.
+     *
+     * @param logoutSessionRequired logout session required
+     */
+    public void setLogoutSessionRequired(Boolean logoutSessionRequired) {
+        this.logoutSessionRequired = logoutSessionRequired;
+    }
+
+    /**
+     * Gets logout uri
+     *
+     * @return logout uri
+     */
+    public String getLogoutUri() {
+        return logoutUri;
+    }
+
+    /**
+     * Sets logout uri.
+     *
+     * @param logoutUri logout uri
+     */
+    public void setLogoutUri(String logoutUri) {
+        this.logoutUri = logoutUri;
     }
 
     /**
